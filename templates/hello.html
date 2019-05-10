@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{super()}}
+Bienvenidos
+{% endblock %}
+
+{% block content %}
+{% if user_ip %}
+<h1>La ip del usuario es: {{user_ip}}</h1>
+{% else %}
+<a href="{{ url_for('index') }}">Ir a inicio...</a>
+{% endif %}
+
+<ul>
+    {% for item in listColors%}
+    <li>{{item}}</li>
+    {% endfor %}
+</ul>
+{% endblock %}

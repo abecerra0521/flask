@@ -1,25 +1,18 @@
-from flask import Flask, request, make_response, redirect, render_template, session, url_for, flash
-from flask_bootstrap import Bootstrap
-from flask_wtf import FlaskForm
-from wtforms.fields import StringField, PasswordField, SubmitField, TextAreaField
-from wtforms.fields.html5 import EmailField
-from wtforms.validators import DataRequired, Email
+from flask import request, make_response, redirect, render_template, session, url_for, flash
+#from flask_bootstrap import Bootstrap
+from app.forms import contactForm
+import unittest
+from app import create_app
 
-app = Flask(__name__)
-bootstrap = Bootstrap(app)
-
-app.config['SECRET_KEY'] = 'clave_secreta'
+app = create_app()
 
 colors = ['azul', 'amarillo', 'verde', 'rojo']
 
 
-class contactForm(FlaskForm):
-    name = StringField('Usuario', validators=[DataRequired("Campo requerido")])
-    email = EmailField('Correo electronico', validators=[
-                       DataRequired("Campo requerido")])
-    message = TextAreaField('Asunto')
-    # password = PasswordField('Contrase&ntilde;a', validators=[DataRequired()])
-    submit = SubmitField()
+@app.cli.command()
+def test():
+    tests = unittest.TestLoader().discover('tests')
+    unittest.TextTestRunner().run(tests)
 
 
 @app.route('/')

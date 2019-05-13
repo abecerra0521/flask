@@ -11,6 +11,12 @@ class loginForm(FlaskForm):
     submit = SubmitField('Ingresar')
 
 
+class recoveryForm(FlaskForm):
+    email = EmailField('Correo electronico', validators=[
+                       DataRequired("Campo requerido")])
+    submit = SubmitField('Recuperar contrasena')
+
+
 class contactForm(FlaskForm):
     name = StringField('Nombre', validators=[DataRequired("Campo requerido")])
     email = EmailField('Correo electronico', validators=[

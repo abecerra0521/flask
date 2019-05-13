@@ -3,15 +3,15 @@
 
 {% block title %}
 {{super()}}
-Login
+Recuperar contraseña
 {% endblock %}
 
 {% block content %}
-<h3 class="text-center text-primary">Iniciar sesi&oacute;n</h3>
+<h3 class="text-center text-primary">Recupera tu contraseña</h3>
 <hr>
 {{ wtf.quick_form(form, button_map={'submit':'secondary btn-block'}) }}
 {% endblock %}
 
 {% block recovery %}
-<a class="float-right" href="{{ url_for('auth.recovery') }}">Olvidaste tu contraseña?</a>
+<a class="float-right" href="{{ url_for('auth.login') }}">Iniciar sesi&oacute;n</a>
 {% endblock %}

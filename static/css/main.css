@@ -1,7 +1,7 @@
 .page-header {
   background-color: #ff9400;
-  margin: 0px 0px 20px 0px;
-  padding: 1px 0px 20px 0px;
+  padding: 20px 0px 20px 0px;
+  font-family: Lobster;
 }
 
 .page-header h1,

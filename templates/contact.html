@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block title %}
+{{super()}}
+Contacto
+{% endblock %}
+
+{% block content %}
+<h3 class="text-center">Contacto</h3>
+<hr>
+{% if name %}
+<h3 class="text-center">Gracias por contactarnos {{name}}</h3>
+{% else %}
+{{ wtf.quick_form(form) }}
+{% endif %}
+<!-- <form action="{{ url_for('contact') }}" method="POST">
+        <div class="form-group">
+            <label>{{ form.name.label }}</label>
+            {{ form.name }}
+        </div>
+    </form> -->
+
+{% endblock %}

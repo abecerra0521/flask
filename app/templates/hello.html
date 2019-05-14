@@ -8,13 +8,14 @@ Bienvenidos
 
 {% block content %}
 {% if user_ip %}
-<h1>La ip del usuario es: {{user_ip}}</h1>
+<h3>Bienvenido {{username}}</h3>
+<h4>La ip del usuario es: {{user_ip}}</h4>
 {% else %}
 <a href="{{ url_for('index') }}">Ir a inicio...</a>
 {% endif %}
 
 <ul>
-    {% for item in listColors%}
+    {% for item in tasks%}
     {{ macros.list_render(item) }}
     {% endfor %}
 </ul>

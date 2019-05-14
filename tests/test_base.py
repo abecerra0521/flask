@@ -17,7 +17,7 @@ class mainTest(TestCase):
 
     def test_index_redirect(self):
         responde = self.client.get(url_for('index'))
-        self.assertRedirects(responde, url_for('hello'))
+        self.assertRedirects(responde, url_for('auth.login'))
 
     def test_hello_get(self):
         response = self.client.get(url_for('hello'))

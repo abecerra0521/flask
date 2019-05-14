@@ -6,8 +6,8 @@ from flask_wtf import FlaskForm
 
 
 class loginForm(FlaskForm):
-    username = StringField('Usuario', validators=[DataRequired()])
-    email = EmailField('Correo electronico', validators=[DataRequired()])
+    username = EmailField('Correo electronico', validators=[DataRequired()])
+    password = PasswordField('Contrase&ntilde;a', validators=[DataRequired()])
     submit = SubmitField('Ingresar')
 
 
@@ -22,5 +22,4 @@ class contactForm(FlaskForm):
     email = EmailField('Correo electronico', validators=[
                        DataRequired("Campo requerido")])
     message = TextAreaField('Asunto')
-    # password = PasswordField('Contrase&ntilde;a', validators=[DataRequired()])
     submit = SubmitField()

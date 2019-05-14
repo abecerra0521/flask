@@ -1,12 +1,14 @@
 from flask import request, make_response, redirect, render_template, session, url_for, flash
-#from flask_bootstrap import Bootstrap
+# from flask_bootstrap import Bootstrap
 from app.forms import contactForm
 import unittest
+from flask_login import login_required, current_user
 from app import create_app
+from app.firestore_services import get_users, get_tasks
 
 app = create_app()
 
-colors = ['azul', 'amarillo', 'verde', 'rojo']
+#colors = ['azul', 'amarillo', 'verde', 'rojo']
 
 
 @app.cli.command()
@@ -25,22 +27,29 @@ def index():
 
 
 @app.route('/hello')
+@login_required
 def hello():
     # user_ip = request.cookies.get('user_ip')
     user_ip = session.get('user_ip')
+    username = current_user.id
+    print(username)
     context = {
         'user_ip': user_ip,
-        'listColors': colors
+        'tasks': get_tasks(user_id=username),
+        'username': username
     }
+
     return render_template('hello.html', **context)
 
 
 @app.route('/profile')
+@login_required
 def profile():
     return render_template('profile.html')
 
 
 @app.route('/contact', methods=['GET', 'POST'])
+@login_required
 def contact():
     contact_form = contactForm()
     contact_name = session.get('name')

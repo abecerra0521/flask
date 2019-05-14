@@ -8,18 +8,16 @@
     <div class="collapse navbar-collapse" id="navbarContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('index') }}">Inicio</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('profile') }}">Perfil</a>
+                <a class="nav-link" href="{{ url_for('hello') }}">Inicio</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ url_for('contact') }}">Contacto</a>
             </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
+        <div>
+            <a href="{{ url_for('profile') }}" class="text-white mx-1" title="Perfil"><i class="fa fa-user"></i></a>
+            <a href="{{ url_for('auth.login') }}" class="text-white mx-1" title="Perfil"><i
+                    class="fa fa-power-off"></i></a>
+        </div>
     </div>
 </nav>

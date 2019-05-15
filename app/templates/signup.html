@@ -7,14 +7,11 @@ Login
 {% endblock %}
 
 {% block content %}
-<h3 class="text-center text-primary">Iniciar sesi&oacute;n</h3>
+<h3 class="text-center text-primary">Registrate</h3>
 <hr>
 {{ wtf.quick_form(form, button_map={'submit':'secondary btn-block'}) }}
-<a href="{{ url_for('auth.signup') }}" class="btn btn-block btn-outline-success my-2">Registrate</a>
 {% endblock %}
 
-
-
 {% block recovery %}
-<a class="float-right" href="{{ url_for('auth.recovery') }}">Olvidaste tu contraseña?</a>
+<a class="float-right" href="{{ url_for('auth.login') }}">Ya tienes una cuenta?</a>
 {% endblock %}

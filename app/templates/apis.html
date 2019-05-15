@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block title %}
+{{super()}}
+Pokemon
+{% endblock %}
+
+{% block content %}
+<h3 class="text-center">APIs</h3>
+<hr>
+<ul>
+    {% for item in pokemons.results %}
+    <li>{{ item.name }}</li>
+    {% endfor %}
+</ul>
+
+
+
+{% endblock %}

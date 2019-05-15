@@ -19,6 +19,14 @@ def get_user_by_id(user_id):
         .document(user_id).get()
 
 
+def insert_user(user_data):
+    data = {
+        'password': user_data.password,
+    }
+    db.collection('users').document(user_data.username).set(data)
+    return True
+
+
 def get_tasks(user_id):
     return db.collection('users')\
         .document(user_id)\

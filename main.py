@@ -5,6 +5,7 @@ import unittest
 from flask_login import login_required, current_user
 from app import create_app
 from app.firestore_services import get_users, get_tasks
+from requests import get, post
 
 app = create_app()
 
@@ -48,11 +49,20 @@ def profile():
     return render_template('profile.html')
 
 
+@app.route('/apis')
+@login_required
+def apis():
+    context = {
+        'pokemons': get('https://pokeapi.co/api/v2/pokemon?offset=0&limit=150').json()
+    }
+    return render_template('apis.html', **context)
+
+
 @app.route('/contact', methods=['GET', 'POST'])
 @login_required
 def contact():
     contact_form = contactForm()
-    contact_name = session.get('name')
+    contact_name = current_user.id
 
     context = {
         'form': contact_form,
@@ -61,8 +71,9 @@ def contact():
 
     if contact_form.validate_on_submit():
         name = contact_form.name.data
-        session['name'] = name
-        flash('Recibimos tu mensaje', 'success')
+        #session['name'] = name
+        flash('Gracias, nos pondremos en contacto contigo ' +
+              contact_name, 'success')
         return redirect(url_for('contact'))
 
     return render_template('contact.html', **context)

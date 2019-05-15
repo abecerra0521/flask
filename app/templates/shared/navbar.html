@@ -13,9 +13,12 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ url_for('contact') }}">Contacto</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('apis') }}">APIs</a>
+            </li>
         </ul>
         <div>
-            <a href="{{ url_for('profile') }}" class="text-white mx-1" title="Perfil"><i class="fa fa-user"></i></a>
+            <a href="{{ url_for('profile') }}" class="text-white mx-1" title="Perfil">{{current_user.id}}</a>
             <a href="{{ url_for('auth.login') }}" class="text-white mx-1" title="Perfil"><i
                     class="fa fa-power-off"></i></a>
         </div>

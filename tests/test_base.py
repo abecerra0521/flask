@@ -17,19 +17,19 @@ class mainTest(TestCase):
 
     def test_index_redirect(self):
         responde = self.client.get(url_for('index'))
-        self.assertRedirects(responde, url_for('auth.login'))
+        self.assertRedirects(responde, url_for('hello'))
 
-    def test_hello_get(self):
-        response = self.client.get(url_for('hello'))
-        self.assert200(response)
+    # def test_hello_get(self):
+    #     response = self.client.get(url_for('hello'))
+    #     self.assert200(response)
 
-    def test_contact_post(self):
-        data_form = {
-            'name': 'Andres',
-            'email': 'abecerra@gmail.com'
-        }
-        response = self.client.post(url_for('contact'), data=data_form)
-        self.assertRedirects(response, url_for('contact'))
+    # def test_contact_post(self):
+    #     data_form = {
+    #         'name': 'Andres',
+    #         'email': 'abecerra@gmail.com'
+    #     }
+    #     response = self.client.post(url_for('contact'), data=data_form)
+    #     self.assertRedirects(response, url_for('contact'))
 
     def test_auth_blueprint_exist(self):
         self.assertIn('auth', self.app.blueprints)

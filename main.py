@@ -1,10 +1,10 @@
 from flask import request, make_response, redirect, render_template, session, url_for, flash
 # from flask_bootstrap import Bootstrap
-from app.forms import contactForm
+from app.forms import contactForm, taskForm, deleteTask
 import unittest
 from flask_login import login_required, current_user
 from app import create_app
-from app.firestore_services import get_users, get_tasks
+from app.firestore_services import get_users, get_tasks, post_task, delete_task, update_task
 from requests import get, post
 
 app = create_app()
@@ -27,20 +27,43 @@ def index():
     return response
 
 
-@app.route('/hello')
+@app.route('/hello', methods=['GET', 'POST'])
 @login_required
 def hello():
     # user_ip = request.cookies.get('user_ip')
     user_ip = session.get('user_ip')
     username = current_user.id
-    print(username)
+
+    task_form = taskForm()
+    delete_task = deleteTask()
+
     context = {
         'user_ip': user_ip,
         'tasks': get_tasks(user_id=username),
-        'username': username
+        'username': username,
+        'task_form': task_form,
+        'delete_task': delete_task
     }
 
+    if task_form.validate_on_submit():
+        post_task(user_id=username, task=task_form.description.data)
+        flash('Tarea creada exitosamente', 'success')
+        return redirect(url_for('hello'))
     return render_template('hello.html', **context)
+
+
+@app.route('/task/delete/<task_id>')
+def delete(task_id):
+    delete_task(current_user.id, task_id)
+    return redirect(url_for('hello'))
+
+
+@app.route('/task/update/<task_id>/<int:done>')
+def update(task_id, done):
+    print(done)
+    print(task_id)
+    update_task(current_user.id, task_id, done)
+    return redirect(url_for('hello'))
 
 
 @app.route('/profile')

@@ -1,3 +1,9 @@
-{% macro list_render(item) %}
-<li>{{item.to_dict().description}}</li>
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% macro list_render(item, delete_task) %}
+<li class="list-group-item">
+    {{item.to_dict().description}}
+    <span class="badge badge-pill badge-secondary float-right">{{ item.to_dict().done }}</span>
+    {{ wtf.quick_form(delete_task, action=url_for('delete', task_id=item.id), button_map={'submit':'secondary'}) }}
+</li>
 {% endmacro %}

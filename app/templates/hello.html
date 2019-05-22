@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% import 'macros.html' as macros %}
+{% import 'bootstrap/wtf.html' as wtf %}
 
 {% block title %}
 {{super()}}
@@ -8,14 +9,31 @@ Bienvenidos
 
 {% block content %}
 {% if user_ip %}
-<h4>La ip del usuario es: {{user_ip}}</h4>
+<h6 class="float-right">La ip del usuario es: {{user_ip}}</h6>
 {% else %}
 <a href="{{ url_for('index') }}">Ir a inicio...</a>
 {% endif %}
 
-<ul>
+<div class="container">
+    <h3 class="text-center">Agregar tarea</h3>
+    <hr>
+    <div>
+        {{ wtf.quick_form(task_form, button_map={'submit':'secondary'}) }}
+    </div>
+</div>
+<ul class="list-group mt-4">
     {% for item in tasks%}
-    {{ macros.list_render(item) }}
+    <li class="list-group-item">
+        {{item.to_dict().description}}
+        <a class="float-right mx-2" href="{{ url_for('update', task_id=item.id, done=item.to_dict().done ) }}">
+            <span class="badge badge-pill {{'badge-success' if item.to_dict().done else 'badge-warning' }}">
+                {{ 'Realizado' if item.to_dict().done else 'Pendiente' }}
+            </span>
+        </a>
+        <a class="text-danger float-right mx-2" href="{{ url_for('delete', task_id=item.id) }}"><i
+                class="fa fa-trash"></i></a>
+    </li>
+    <!-- {{ macros.list_render(item, delete_task) }} -->
     {% endfor %}
 </ul>
 {% endblock %}

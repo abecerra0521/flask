@@ -23,3 +23,13 @@ class contactForm(FlaskForm):
                        DataRequired("Campo requerido")])
     message = TextAreaField('Asunto')
     submit = SubmitField()
+
+
+class taskForm(FlaskForm):
+    description = StringField('Descripcion', validators=[
+                              DataRequired('Campo reuerido')])
+    submit = SubmitField('Guardar')
+
+
+class deleteTask(FlaskForm):
+    SubmitField = SubmitField('Eliminar')
